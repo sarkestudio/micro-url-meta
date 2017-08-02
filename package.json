@@ -1,15 +1,15 @@
 {
   "name": "micro-url-meta-parser",
   "version": "1.0.0",
-  "description": "",
+  "description": "Microservice for parsing url metadata",
   "main": "index.js",
   "scripts": {
     "dev": "micro-dev",
     "start": "micro"
   },
-  "keywords": [],
+  "keywords": ["micro", "url", "metadata", "parser"],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "jsdom": "^11.1.0",
     "micro": "^8.0.0",
