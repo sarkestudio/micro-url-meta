@@ -1,0 +1,23 @@
+{
+  "name": "micro-url-meta",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "micro-dev",
+    "start": "micro"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsdom": "^11.1.0",
+    "micro": "^8.0.0",
+    "micro-route": "^2.4.0",
+    "node-fetch": "^1.7.1",
+    "page-metadata-parser": "^0.6.1"
+  },
+  "devDependencies": {
+    "micro-dev": "^1.0.1"
+  }
+}
