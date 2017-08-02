@@ -7,10 +7,7 @@ async function parse_meta_handler(req, res, { params, query }) {
   const url = query['url'];
 
   if (typeof url !== 'string') {
-    send(res, 400, {
-      status: 400,
-      message: '🤔'
-    });
+    rr(res, 400, '🤔');
 
     return;
   }
@@ -25,18 +22,12 @@ async function parse_meta_handler(req, res, { params, query }) {
       info: info
     });
   } catch (e) {
-    send(res, 500, {
-      status: 500,
-      message: '💤'
-    });
+    rr(res, 500, '💤');
   }
 }
 
 function notfound(req, res) {
-  send(res, 404, {
-    status: 404,
-    message: '👻'
-  });
+  rr(res, 404, '👻');
 }
 
 function h(handler) {
@@ -44,6 +35,13 @@ function h(handler) {
     res.setHeader('content-type', 'application/json; charset=utf-8');
     handler(req, res, route);
   };
+}
+
+function rr(response, status, message) {
+  send(response, status, {
+    status,
+    message
+  });
 }
 
 module.exports = dispatch()
