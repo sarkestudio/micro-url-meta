@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "micro-dev",
-    "start": "micro"
+    "start": "micro",
+    "prod": "micro -p 3001 -H 127.0.0.1"
   },
   "keywords": [
     "micro",
