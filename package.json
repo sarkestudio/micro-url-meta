@@ -7,7 +7,12 @@
     "dev": "micro-dev",
     "start": "micro"
   },
-  "keywords": ["micro", "url", "metadata", "parser"],
+  "keywords": [
+    "micro",
+    "url",
+    "metadata",
+    "parser"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
