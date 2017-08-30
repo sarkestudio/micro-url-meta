@@ -3,15 +3,16 @@ const dispatch = require('micro-route/dispatch');
 const valid_url = require('valid-url');
 const cors = require('./cors');
 const { fetch_html } = require('./html');
-const { fetch_image, is_image } = require('./image');
+const { fetch_image, is_image, normalize_image_info } = require('./image');
 const { parser, info_type } = require('./parser');
 
 const process_url = url => {
   if (is_image(url)) {
     return async url => {
       const image_info = await fetch_image(url);
+      const normalized_info = normalize_image_info(image_info);
 
-      return { type: image_info['mime'], info: image_info };
+      return { type: normalized_info.type, info: normalized_info };
     };
   } else {
     return async url => {
