@@ -1,26 +1,46 @@
 const { send } = require('micro');
 const dispatch = require('micro-route/dispatch');
+const valid_url = require('valid-url');
 const cors = require('./cors');
 const { fetch_html } = require('./html');
-const { parser, type } = require('./parser');
+const { fetch_image, is_image } = require('./image');
+const { parser, info_type } = require('./parser');
+
+const process_url = url => {
+  if (is_image(url)) {
+    return async url => {
+      const image_info = await fetch_image(url);
+
+      return { type: image_info['mime'], info: image_info };
+    };
+  } else {
+    return async url => {
+      const url_body = await fetch_html(url);
+      const info = parser(url, url_body);
+      const type = info_type(info);
+
+      return { type, info };
+    };
+  }
+};
 
 const parse_meta_handler = async (req, res, { params, query }) => {
-  const url = query['url'];
+  const url = query.url || '';
 
-  if (typeof url !== 'string') {
+  if (!valid_url.isWebUri(url)) {
     rr(res, 400, '🤔');
 
     return;
   }
 
   try {
-    const url_body = await fetch_html(url);
-    const info = parser(url, url_body);
+    const process_fn = process_url(url);
+    const { type, info } = await process_fn(url);
 
     send(res, 200, {
-      url: url,
-      type: type(info),
-      info: info
+      url,
+      type,
+      info
     });
   } catch (e) {
     rr(res, 500, '💤');

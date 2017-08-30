@@ -26,8 +26,8 @@ function parser(url, html) {
   });
 }
 
-function type(info) {
-  if (info.type === 'video.other' && /.*\.gif$/.test(info.url)) {
+function info_type(info) {
+  if (info && info.type === 'video.other' && /.*\.gif$/.test(info.url)) {
     return 'image/gif';
   }
 
@@ -36,5 +36,5 @@ function type(info) {
 
 module.exports = {
   parser,
-  type
+  info_type
 };
